@@ -1,25 +1,45 @@
 {
-  "name": "testing_maps",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@types/node": "20.5.0",
-    "@types/react": "18.2.20",
-    "@types/react-dom": "18.2.7",
-    "autoprefixer": "10.4.15",
-    "eslint": "8.47.0",
-    "eslint-config-next": "13.4.13",
-    "next": "13.4.13",
-    "postcss": "8.4.27",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
-  }
+	"name": "mweb-portal-newdawn",
+	"version": "0.2.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@emotion/react": "^11.10.6",
+		"@emotion/styled": "^11.10.6",
+		"@fontsource/roboto": "^4.5.8",
+		"@headlessui/react": "^1.7.10",
+		"@loadable/component": "^5.15.3",
+		"@mui/material": "^5.11.14",
+		"@react-google-maps/api": "^2.19.2",
+		"@types/node": "18.16.1",
+		"@types/react": "18.2.14",
+		"@types/react-dom": "18.2.6",
+		"@types/react-slick": "^0.23.10",
+		"eslint": "8.44.0",
+		"eslint-config-next": "^12.0.4",
+		"formik": "^2.2.9",
+		"html-react-parser": "^3.0.9",
+		"next": "13.4.9",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"react-icons": "^4.7.1",
+		"react-responsive": "^9.0.2",
+		"react-slick": "^0.29.0",
+		"slick-carousel": "^1.8.1",
+		"swiper": "^9.0.0",
+		"typescript": "4.9.5",
+		"use-places-autocomplete": "^4.0.1",
+		"yup": "^1.0.2"
+	},
+	"devDependencies": {
+		"@types/loadable__component": "^5.13.4",
+		"autoprefixer": "^10.4.13",
+		"postcss": "^8.4.21",
+		"tailwindcss": "^3.3.2"
+	}
 }

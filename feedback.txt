@@ -1,0 +1,16 @@
+
+## Feedback 
+A: checkout folder: TODO : mv components folder nested into shared components : DONE
+  1: remove Layout.tsx because its now shared : DONE
+  2: remove <FooterISPNavigation /> because Bianca has done it: Navigation
+       <ProgressionFooter hideBottomButtons={boolean} /> : TODO: commit: Bianca : In progress
+
+B: <Phase2ProgressionHeader /> to be fixed: Look at <ProgressionHeader /> 
+    Will change to <ProgressionHeader /> by extending some props beacuse the only different between the 2 is checkout button 
+      TODO : Commit: Bianca DONE
+
+C: Extend StepInProgression enum to include phase-2: In progress
+   
+D: Put checkout pages into MwebContainer since the layout has changed: In progress   
+
+

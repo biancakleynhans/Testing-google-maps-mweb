@@ -1,0 +1,12 @@
+.cards {
+    width: 100%;
+    height: 128px;
+}
+
+@media screen and (min-width: 1024px) {
+    .cards {
+        width: 100%;
+        max-width: 232.5px;
+        height: 200px;
+    }
+}

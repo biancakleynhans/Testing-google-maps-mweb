@@ -1,0 +1,94 @@
+#checkbox-container {
+    display: inline-block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    /* margin-right: 10px; */
+}
+#checkbox-container:hover input[type="checkbox"]:not(:disabled) {
+    border-color: #3B6D8B;
+}
+
+#checkbox-container input[type="checkbox"]:disabled{
+    opacity:20%;
+    cursor:not-allowed
+}
+#checkbox-container input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #255D7E;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    background-color: transparent;
+}
+
+#checkbox-container:focus-within input[type="checkbox"]:active {
+    box-shadow: 0px 0px 0px 3px #C8ECE9;
+}
+#checkbox-input:active {
+    box-shadow: 0px 0px 0px 3px #C8ECE9;
+}
+
+
+#checkbox-container input[type="checkbox"]::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background-color:transparent;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#checkbox-container input[type="checkbox"]:checked::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 2px;
+    border-radius: 2px;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+#checkbox-container input[type="checkbox"]+svg {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #255D7E;
+    border-radius: 4px;
+}
+
+#checkbox-container input[type="checkbox"]:checked+svg {
+    display: block;
+    fill: white;
+    background-color: #255D7E;
+}
+#checkbox-container input[type="checkbox"]+svg:active {
+    box-shadow: 0px 0px 0px 3px #C8ECE9;
+}
+
+#checkbox-container input[type="checkbox"]:checked+svg:hover {
+    background-color: #3B6D8B;
+    cursor: pointer; 
+}
+
+

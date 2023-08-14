@@ -1,0 +1,81 @@
+/* .container {
+    height: 510px;
+} */
+/* mwebAccordion styles */
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+.tabs {
+  height: auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tab {
+  width: 100%;
+  color: white;
+  overflow: hidden;
+}
+.tabLabel {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 0 2.5rem 1rem;
+  background: inherit;
+  color: #646464;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.tabLabel:hover {
+  color: #000;
+}
+.tabLabel::before {
+  /* transform: rotate(90deg); */
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.8rem;
+  text-align: center;
+}
+
+.tabContent {
+  max-height: 0;
+  padding: 0 3.2rem;
+  color: #646464;
+  background: inherit;
+  transition: all 0.35s;
+}
+.tabClose {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  font-size: 0.75em;
+  cursor: pointer;
+}
+.tabClose:hover {
+  background: #fff;
+}
+
+input:checked + .tabLabel {
+  background: inherit;
+  padding: 0 1rem 0.6rem 1rem;
+  color: #000;
+}
+
+input:checked ~ .tabContent {
+  max-height: 100vh;
+  padding: 0.8rem 0 0.8rem 3.2rem;
+  /* color: #000; */
+}
+
+@media screen and (min-width: 1366px) {
+  .tabLabel {
+    font-size: 1.3rem;
+  }
+  .tabs {
+    height: 400px;
+  }
+}
+

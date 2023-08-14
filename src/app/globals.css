@@ -2,26 +2,115 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+html {
+	scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
+html,
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+/* body:has(#nav) {
+    margin-top: 72px;
+} */
+
+@layer components {
+	.max-container-1366 {
+		width: 100%;
+		max-width: 1366px;
+		margin: 0;
+	}
+	.max-container-1366-center {
+		width: 100%;
+		max-width: 1366px;
+		margin: 0 auto;
+	}
+}
+
+#faq-description a {
+	color: #143b8f;
+}
+
+#faq-description a:hover {
+	text-decoration: underline;
+}
+
+.mweb-highlight {
+	color: #f2eb5f !important;
+}
+
+/* mweb list styles which is overwritten by tailwindcss */
+.mweb-ul {
+	list-style-type: square;
+	padding-left: 20px;
+}
+
+.mweb-ol {
+	list-style-type: revert;
+	padding-left: 20px;
+}
+
+.mweb-ul-square {
+	list-style-type: square;
+	padding-left: 20px;
+}
+
+/* Tailwind Mweb Colour Design Class Enhancements */
+.text-mwTextLinkLarge:hover,
+.text-mwTextLinkBase:hover,
+.text-mwTextLinkSmall:hover,
+.text-mwTextLinkXSmall:hover {
+	cursor: pointer;
+}
+
+.text-mwCaptionLarge,
+.text-mwCaptionMedium,
+.text-mwCaptionSmall,
+.text-mwCaptionXSmall {
+	text-transform: uppercase;
+}
+
+.text-mwCaptionLarge.normal,
+.text-mwCaptionMedium.normal,
+.text-mwCaptionSmall.normal,
+.text-mwCaptionXSmall.normal {
+	text-transform: none;
+}
+
+/* Scroll bar for confirm location  */
+/* width */
+.addressListShow::-webkit-scrollbar {
+	width: 8px;
+}
+
+/* Track */
+.addressListShow::-webkit-scrollbar-track {
+	background: #f4f7f9;
+	border-radius: 8px;
+}
+
+/* Handle */
+.addressListShow::-webkit-scrollbar-thumb {
+	background: #255d7e;
+	border-radius: 10px !important;
+	width: 6px !important;
+	height: 47px !important;
+}
+
+/* width */
+.addressListHide::-webkit-scrollbar {
+	display: none !important;
+}
+
+/* Track */
+.addressListHide::-webkit-scrollbar-track {
+	display: none !important;
+}
+
+/* Handle */
+.addressListHide::-webkit-scrollbar-thumb {
+	display: none !important;
 }

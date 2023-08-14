@@ -1,0 +1,400 @@
+.mainLink,
+.button,
+.label {
+	border: 0;
+	padding: 0;
+	background: transparent;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: left;
+	gap: 4px;
+	padding: 0;
+	height: 100%;
+}
+
+.mainLink {
+	gap: 0;
+}
+
+/* animate link chevron up/down */
+/* .mainLink > div svg {
+   transition: transform 0s ease-in-out;
+} */
+
+/* .dropdown svg {
+	transform: rotate(0deg);
+} */
+
+.dropdown.open-dropdown-item svg {
+	transform: rotate(180deg);
+}
+.dropdownMenu:hover+.mainLink {
+	transform: rotate(90deg);
+}
+
+.h2 {
+	margin: 16px 0 10px;
+	font-size: 12px;
+	font-weight: 400;
+	color: rgba(255, 255, 255, 0.3);
+}
+
+@media (min-width: 1025px) {
+	.h2 {
+		font-size: 14px;
+	}
+}
+
+.burger,
+.close,
+.dropdowns,
+.mobileDropdowns {
+	position: absolute;
+	top: 0;
+}
+
+.navbar {
+	z-index: 500;
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	background: inherit;
+	color: #000;
+	/* padding: 0 90px 0 80px; */
+}
+
+.container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.logo {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	position: relative;
+	min-width: 137px;
+	max-width: 137px;
+	height: 36px;
+	object-fit: cover;
+}
+
+.cart {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	position: relative;
+	width: 27px;
+	height: 27px;
+}
+
+.burger {
+	z-index: 3;
+	right: 0;
+	display: grid;
+	place-items: center;
+	width: 72px;
+	height: 72px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.close {
+	background-repeat: no-repeat;
+	background-position: center;
+	z-index: 600;
+	right: 0;
+	display: grid;
+	place-items: center;
+	width: 72px;
+	height: 72px;
+}
+
+@media screen and (min-width: 1024px) {
+
+	.burger,
+	.close {
+		display: none;
+	}
+
+	.dropdown:hover svg {
+		transform: rotate(180deg);
+	}
+
+}
+
+.button>.img {
+	display: none;
+}
+
+@media screen and (min-width: 1024px) {
+	.dropdown>.button {
+		padding: 0 10px 0 24px;
+	}
+
+	.button>.img {
+		display: block;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.dropdown:hover .button {
+		opacity: 1;
+	}
+}
+
+.dropdowns {
+	left: -9999px;
+	z-index: 500;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	background: #f1f1f2;
+	opacity: 0;
+	visibility: hidden;
+	transition-property: opacity, visibility;
+	transition-duration: 0.3s;
+}
+
+@media screen and (max-width: 1024px) {
+	.logo {
+		min-width: 92px;
+		width: 92px;
+		height: 24px;
+	}
+
+	.navbar {
+		color: #fff;
+		/* padding: 0 15px; */
+	}
+
+	.container {
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.burger {
+		width: 72px;
+		height: 72px;
+	}
+
+	.close {
+		width: 72px;
+		height: 72px;
+	}
+
+	.cart {
+		margin-right: 3rem;
+	}
+
+	.mainLink,
+	.label {
+		justify-content: flex-start;
+		margin-bottom: 0.8rem;
+		font-weight: 700;
+	}
+
+	.dropdownsOpen {
+		display: block;
+		height: 100%;
+		min-height: 100%;
+		overflow: auto;
+		opacity: 1;
+		visibility: visible;
+		top: 72px;
+		left: 0;
+		padding: 30px 0 100px 15px;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.dropdowns {
+		position: static;
+		flex-direction: row;
+		justify-content: space-between;
+		background: transparent;
+		opacity: 1;
+		visibility: visible;
+		/* padding: 0 3%; */
+		margin-left: 40px;
+	}
+}
+
+.dropdown {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+
+@media screen and (min-width: 1024px) {
+	.dropdown {
+		height: 100%;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.dropdownMenu {
+		position: absolute;
+		top: 75px;
+		left: 0;
+		display: flex;
+		min-width: 155px;
+		min-height: 100%;
+		height: auto;
+		padding: 8px;
+		margin-bottom: 0;
+		flex-direction: column;
+		justify-content: flex-start;
+		opacity: 0;
+		visibility: hidden;
+		translate: 0 24px;
+		transition: 0.3s;
+	}
+
+	.dropdown:hover .dropdownMenu {
+		opacity: 1;
+		visibility: visible;
+		translate: 0 0;
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	.dropdownsOpen {
+		display: none;
+	}
+
+	.dropdownMenu {
+		padding: 5px 0;
+	}
+}
+
+.dropdownMenu .button {
+	display: block;
+	width: 100%;
+	color: #000;
+	opacity: 1;
+	text-align: left;
+	white-space: nowrap;
+}
+
+@media screen and (min-width: 1024px) {
+	.dropdownMenu .button {
+		opacity: 0.6;
+	}
+
+	.dropdown:hover .button {
+		opacity: 1;
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	.dropdownMenu .button {
+		height: auto;
+		font-size: 15px;
+		margin-bottom: 1rem;
+	}
+}
+
+.dropdownMenu .button:hover {
+	opacity: 1;
+}
+
+/* Mobile Nav */
+
+.checkbox {
+	position: absolute;
+	opacity: 0;
+	z-index: -1;
+}
+
+.label {
+	font-size: 16px;
+	padding: 0 0 2rem 0;
+	margin-bottom: 0;
+}
+
+.mobileDropdowns {
+	left: -9999px;
+	z-index: 500;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	opacity: 0;
+	visibility: hidden;
+	transition-property: opacity, visibility;
+	transition-duration: inherit;
+}
+
+.mobileDropdownsOpen {
+	display: block;
+	width: 100%;
+	height: 100vh;
+	min-height: 100%;
+	overflow: auto;
+	opacity: 1;
+	visibility: visible;
+	top: 60px;
+	left: 0;
+	padding: 30px 0 100px 15px;
+}
+
+@media screen and (min-width: 1024px) {
+	.mobileDropdownsOpen {
+		display: none;
+	}
+}
+
+.mobileContent {
+	text-align: left;
+	max-height: 0;
+	padding: 0;
+	transition: all;
+	opacity: 0;
+	visibility: hidden;
+}
+
+.label .img {
+	transition: all 0.35s;
+}
+
+.buttonMobile {
+	border: 0;
+	padding: 0;
+	background: transparent;
+	cursor: pointer;
+	line-height: 1;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	text-align: left;
+	padding: 0 0 0.6rem 0;
+	height: 100%;
+}
+
+.checkbox:checked+.label {
+	padding: 0 0 0.7rem 0;
+}
+
+.checkbox:checked+.label svg {
+	transform: rotate(180deg);
+}
+
+.checkbox:checked~.mobileContent {
+	max-height: 100vh;
+	padding: 0.5rem 0;
+	opacity: 1;
+	visibility: visible;
+}

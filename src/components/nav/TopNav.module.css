@@ -1,0 +1,19 @@
+.container {
+  display: none;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 80px;
+  background-color: inherit;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (width >= 1025px) {
+  .container {
+    display: flex;
+  }
+}
