@@ -33,6 +33,7 @@ import {getGeocode} from 'use-places-autocomplete';
 import {AddCoverageDataToShoppingCart, GetCoverageDataToShoppingCart} from '@/utils/Coverage';
 import useCheckoutProcess from '@/hooks/useCheckoutProcess';
 import {NavJourneyFibre, NavJourneyFibreAmber, NavJourneyHomeInternet, NavJourneyLte} from '@/constants/NavJourneySets';
+import {IShoppingCartSession} from '@/services/shoppingCartSessionService';
 
 export enum providerJourneyType {
 	'fibre' = 'fibre',
@@ -182,11 +183,15 @@ function Provider({children, ...props}: iProps) {
 	}
 
 	// fibre green and lte green
-	function handleGreen(location: IAddressObject) {
+	function handleGreen(location: IAddressObject, response: IServiceEntry[], lat: number, long: number) {
 		settypeStatus(providerJourneyStatus.green);
-		setcurrentCoverage(location);
 		sethasError(false);
 		seterrorMsg('');
+		handleGetServicesFromCoverage(response, typeProvider);
+		setformattedAdressString(location.formatted_address);
+		setcurrentCoverage(location);
+		handleSetMap(lat, long);
+		setPortalShoppingCartSession(AddCoverageDataToShoppingCart(location, response, typeProvider, providerJourneyStatus.green));
 
 		if (path === NavJourneyHomeInternet[0].path) {
 			router.push(NavJourneyHomeInternet[1].path);
@@ -216,12 +221,16 @@ function Provider({children, ...props}: iProps) {
 	}
 
 	// fibre amber, red and lte amber, red
-	function handleAmberRed(location: IAddressObject, status: providerJourneyStatus) {
+	function handleAmberRed(location: IAddressObject, response: IServiceEntry[], lat: number, long: number, status: providerJourneyStatus) {
 		settypeStatus(status);
-		setcurrentCoverage(location);
 		sethasError(false);
 		seterrorMsg('');
 		setisLoading(false);
+		handleGetServicesFromCoverage(response, typeProvider);
+		setformattedAdressString(location.formatted_address);
+		setcurrentCoverage(location);
+		handleSetMap(lat, long);
+		setPortalShoppingCartSession(AddCoverageDataToShoppingCart(location, response, typeProvider, status));
 
 		if (path === NavJourneyHomeInternet[0].path) {
 			router.push(NavJourneyHomeInternet[1].path);
@@ -239,6 +248,9 @@ function Provider({children, ...props}: iProps) {
 		setisLoading(false);
 		sethasError(true);
 		seterrorMsg(error);
+
+		AddCoverageDataToShoppingCart(null, [], providerJourneyType.error, providerJourneyStatus.error);
+		setPortalShoppingCartSession(null);
 	}
 
 	// container function holding all the relevent funtionality this function is the function exposed for usage
@@ -251,15 +263,13 @@ function Provider({children, ...props}: iProps) {
 
 		if (!isSameAdress) {
 			console.log('%c Ok new data we can trigger the 28 east api call here ', 'color:orange', lat, long);
-			setformattedAdressString(location.formatted_address);
-			setcurrentCoverage(location);
-			handleSetMap(lat, long);
 
 			doApiCallTo28E(lat, long)
 				.then((response) => {
 					if (typeof response !== 'string') {
 						console.log('%c Response from CallTo28E SERVICES: ', 'color:yellow', typeProvider.toString(), response);
-						handleGetServicesFromCoverage(response, typeProvider);
+
+						let update: IShoppingCartSession = {} as IShoppingCartSession;
 
 						const matched = response.filter((service) => service.type === typeProvider.toString());
 						const isRed = matched.length === 0 ? true : false;
@@ -268,39 +278,31 @@ function Provider({children, ...props}: iProps) {
 						// red journey
 						if (isRed) {
 							console.log(`%c JOURNEY IS ${typeProvider} RED`, 'color:red');
-							handleAmberRed(location, providerJourneyStatus.red);
-							let update = AddCoverageDataToShoppingCart(location, response, typeProvider, providerJourneyStatus.red);
-							setPortalShoppingCartSession(update);
+							update = AddCoverageDataToShoppingCart(location, response, typeProvider, providerJourneyStatus.red);
+							handleAmberRed(location, response, lat, long, providerJourneyStatus.red);
 						}
 						// Amber Journey
 						else if (isAmber) {
 							console.log(`%c JOURNEY IS ${typeProvider} AMBER`, 'color:orange');
-							handleAmberRed(location, providerJourneyStatus.amber);
-							let update = AddCoverageDataToShoppingCart(location, response, typeProvider, providerJourneyStatus.amber);
-							setPortalShoppingCartSession(update);
+							update = AddCoverageDataToShoppingCart(location, response, typeProvider, providerJourneyStatus.amber);
+							handleAmberRed(location, response, lat, long, providerJourneyStatus.amber);
 						}
 						// Green Journey
 						else {
 							console.log(`%c JOURNEY IS ${typeProvider} GREEN`, 'color:green');
-							handleGreen(location);
-							let update = AddCoverageDataToShoppingCart(location, response, typeProvider, providerJourneyStatus.green);
-							setPortalShoppingCartSession(update);
+							handleGreen(location, response, lat, long);
 						}
 					}
 					// error happend
 					else {
 						console.log('%c API RESPONSE IS STRING', 'color: yellow', response);
 						handleError(response);
-						AddCoverageDataToShoppingCart(null, [], providerJourneyType.error, providerJourneyStatus.error);
-						setPortalShoppingCartSession(null);
 					}
 				})
 				.catch((error) => {
 					console.log('%c Error Response from doApiCallTo28E', 'color:yellow', error);
 					setisLoading(false);
 					handleError(error);
-					AddCoverageDataToShoppingCart(null, [], providerJourneyType.error, providerJourneyStatus.error);
-					setPortalShoppingCartSession(null);
 				});
 		}
 		// same adress
@@ -344,7 +346,7 @@ function Provider({children, ...props}: iProps) {
 
 	// Converts lat, long to address obj needed for state
 	function getAddressObj(lat: number, long: number) {
-		setisLoading(false);
+		setisLoading(true);
 		getGeocode({location: {lat: Number(lat), lng: Number(long)}})
 			.then((response: any) => {
 				if (response) {
@@ -352,10 +354,16 @@ function Provider({children, ...props}: iProps) {
 					startCoverageSearch(response[0] as IAddressObject);
 				} else {
 					console.log('%c NO RESULTS FOUND FOR GEOCODE', 'color: red');
+					sethasError(true);
+					seterrorMsg('NO RESULTS FOUND FOR GEOCODE');
+					setisLoading(false);
 				}
 			})
 			.catch((e) => {
 				console.log('%c Geocoder failed due to:', 'color: red', e.message);
+				sethasError(true);
+				seterrorMsg(e.message);
+				setisLoading(false);
 			});
 	}
 

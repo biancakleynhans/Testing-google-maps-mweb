@@ -32,6 +32,9 @@ export default function SearchBarSquare(props: iProps) {
 		if (autoComplete.value.length === 0 && currentFormattedAdress.length > 0) {
 			autoComplete.setValue(currentFormattedAdress);
 		}
+		if (autoComplete.value !== currentFormattedAdress) {
+			autoComplete.setValue(currentFormattedAdress);
+		}
 	}, [currentFormattedAdress]);
 
 	// suggestion => google.maps.places.AutocompletePrediction
