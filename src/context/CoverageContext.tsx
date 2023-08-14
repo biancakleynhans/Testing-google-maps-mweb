@@ -448,10 +448,10 @@ function Provider({children, ...props}: iProps) {
 
 	return (
 		<>
-			<Script
+			{/* <Script
 				src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&libraries=places&callback=Function.prototype`}
 				strategy={'beforeInteractive'}
-			/>
+			/> */}
 
 			<CoverageContext.Provider value={value}>{children}</CoverageContext.Provider>
 		</>

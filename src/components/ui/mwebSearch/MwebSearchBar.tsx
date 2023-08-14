@@ -6,6 +6,7 @@ import SearchBarRound from './SearchBarRound';
 import LoadingSpinner from '@/components/shared/LoadingSpinner';
 import MwebIcon from '../mwebIcon/MwebIcon';
 import MwebButton from '../mwebButtons/MwebButtonMain';
+import Script from 'next/script';
 
 interface iProps {
 	type: 'round' | 'square';
@@ -90,6 +91,10 @@ export default function MwebSearchBar(props: iProps) {
 
 	return (
 		<>
+			{/* <Script
+				src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&libraries=places&callback=Function.prototype`}
+				strategy={'beforeInteractive'}
+			/> */}
 			{type === 'square' && <SearchBarSquare isDisabled={isDisabled} placeHolderText={placeHolderText} />}
 
 			{type === 'round' && <SearchBarRound isDisabled={isDisabled} placeHolderText={placeHolderText} />}
